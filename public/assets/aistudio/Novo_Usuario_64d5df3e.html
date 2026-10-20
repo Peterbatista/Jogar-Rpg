@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Usuário - RPG MESA</title>
+    <link rel="stylesheet" href="../CSS/rpg-style.css">
+</head>
+<body>
+
+    <main class="tela-cadastro">
+        
+        <div class="painel-cadastro">
+            
+            <header>
+                <h1 class="titulo-jogo">Cadastro de Jogador</h1>
+                <p class="subtitulo">Registre-se na guilda para iniciar sua jornada</p>
+            </header>
+            
+            <form id="formNovoUsuario">
+                
+                <fieldset class="grupo-campos">
+                    <legend>Dados Pessoais</legend>
+                    <div class="linha-form">
+                        <div class="campo">
+                            <label for="nome">Nome Completo:</label>
+                            <input type="text" id="nome" placeholder="Ex.: Peterson Batista" required>
+                        </div>
+                        <div class="campo">
+                            <label for="cpf">CPF:</label>
+                            <input type="text" id="cpf" placeholder="000.000.000-00" required>
+                        </div>
+                        <div class="campo">
+                            <label for="nasc">Data Nasc.:</label>
+                            <input type="date" id="nasc" required>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="grupo-campos">
+                    <legend>Contato</legend>
+                    <div class="linha-form">
+                        <div class="campo">
+                            <label for="fone">Telefone/WhatsApp:</label>
+                            <input type="tel" id="fone" placeholder="(DDD) 9XXXX-XXXX" required>
+                        </div>
+                        <div class="campo">
+                            <label for="email">E-mail:</label>
+                            <input type="email" id="email" placeholder="heroi@reino.com" required>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="grupo-campos">
+                    <legend>Endereço</legend>
+                    <div class="linha-form">
+                        <div class="campo">
+                            <label for="cep">CEP:</label>
+                            <input type="text" id="cep" placeholder="00000-000" required>
+                        </div>
+                        <div class="campo" style="flex-grow: 2;">
+                            <label for="rua">Rua/Avenida:</label>
+                            <input type="text" id="rua" placeholder="Nome da rua" required>
+                        </div>
+                        <div class="campo">
+                            <label for="num">Número:</label>
+                            <input type="number" id="num" placeholder="123" required>
+                        </div>
+                    </div>
+                    <div class="linha-form">
+                        <div class="campo">
+                            <label for="bairro">Bairro:</label>
+                            <input type="text" id="bairro" placeholder="Centro" required>
+                        </div>
+                        <div class="campo">
+                            <label for="cidade">Cidade:</label>
+                            <input type="text" id="cidade" placeholder="Sua Cidade" required>
+                        </div>
+                        <div class="campo">
+                            <label for="uf">Estado (UF):</label>
+                            <input type="text" id="uf" placeholder="SP" maxlength="2" required>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset class="grupo-campos">
+                    <legend>Informações Adicionais</legend>
+                    <div class="campo">
+                        <label for="obs">Observações de Campanha:</label>
+                        <textarea id="obs" rows="3" placeholder="Adicione notas, dias disponíveis para jogar, etc..."></textarea>
+                    </div>
+                </fieldset>
+
+                <div class="botoes-acao">
+                    <button type="button" class="btn-salvar" onclick="salvarJogador()">Salvar Jogador</button>
+                    <button type="button" class="btn-voltar" onclick="window.location.href='Tela_inicial.html'">Voltar ao Início</button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // User profiles
+    match /users/{userId} {
+      allow read: if isOwner(userId);
+      allow create: if isOwner(userId)
+        && incoming().uid == request.auth.uid
+        && incoming().email is string;
+      allow update: if isOwner(userId)
+        && incoming().uid == existing().uid;
+      allow delete: if isOwner(userId);
+    }
+
+    // Character RPG sheets
+    match /characters/{characterId} {
+      allow read: if isSignedIn() && (resource.data.userId == request.auth.uid || resource == null);
+      allow create: if isSignedIn() 
+        && isValidId(characterId)
+        && incoming().userId == request.auth.uid
+        && incoming().id is string
+        && incoming().nome is string && incoming().nome.size() <= 100
+        && incoming().classe is string && incoming().classe.size() <= 50
+        && incoming().raca is string && incoming().raca.size() <= 50;
+      allow update: if isSignedIn()
+        && isValidId(characterId)
+        && existing().userId == request.auth.uid
+        && incoming().userId == existing().userId
+        && incoming().id == existing().id;
+      allow delete: if isSignedIn()
+        && isValidId(characterId)
+        && existing().userId == request.auth.uid;
+    }
+
+    // Public rankings
+    match /rankings/{characterId} {
+      allow read: if true;
+      allow create, update: if isSignedIn()
+        && isValidId(characterId)
+        && incoming().userId == request.auth.uid
+        && incoming().characterId is string
+        && incoming().characterName is string && incoming().characterName.size() <= 100
+        && incoming().scoreTotal is number;
+      allow delete: if isSignedIn()
+        && isValidId(characterId)
+        && existing().userId == request.auth.uid;
+    }
+
+    // Notifications and daily events
+    match /notifications/{notificationId} {
+      allow read: if true;
+      allow write: if isSignedIn() && (
+        request.auth.token.email == "peter.petiao@gmail.com" ||
+        request.auth.uid != null
+      );
+    }
+  }
+}

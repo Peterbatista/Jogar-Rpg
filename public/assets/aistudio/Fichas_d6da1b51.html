@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Ficha - RPG MESA</title>
+    <link rel="stylesheet" href="../CSS/rpg-style.css">
+    <style>
+        /* Pequeno ajuste extra para os cards acomodarem o texto novo sem quebrar o layout */
+        .info-card { font-size: 11px; margin-top: 5px; color: #ccc; line-height: 1.4; text-align: left; }
+        .vantagem { color: #4CAF50; font-weight: bold; }
+        .desvantagem { color: #F44336; font-weight: bold; }
+        .nome-card { font-size: 16px; color: #ffd700; font-weight: bold; display: block; border-bottom: 1px solid #5a4f35; padding-bottom: 3px; margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+
+    <main class="tela-dividida">
+        
+        <div class="lado-paisagem"></div>
+
+        <div class="lado-ficha">
+            
+            <header>
+                <h1 class="titulo-jogo">Forjar Herói</h1>
+                <p class="subtitulo">Defina sua origem e seus atributos de D&D</p>
+            </header>
+            
+            <form id="formNovaFicha">
+                
+                <!-- Identidade e História -->
+                <fieldset class="grupo-campos">
+                    <legend>Identidade</legend>
+                    <div class="campo" style="margin-bottom: 15px;">
+                        <label for="nomePersonagem">Nome do Personagem:</label>
+                        <input type="text" id="nomePersonagem" placeholder="Ex.: Valerius, o Bravo" required>
+                    </div>
+                    
+                    <!-- Novo campo de História com barra de rolagem -->
+                    <div class="campo">
+                        <label for="historia">História / Background:</label>
+                        <textarea id="historia" rows="3" style="resize: vertical; overflow-y: auto; max-height: 120px;" placeholder="Escreva a origem do seu herói, motivações e segredos..."></textarea>
+                    </div>
+                </fieldset>
+
+                <!-- Seleção de Raça -->
+                <fieldset class="grupo-campos">
+                    <legend>Raça</legend>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <p style="font-size: 13px; color: #ccc;">Sua linhagem define seus traços físicos:</p>
+                    </div>
+                    
+                    <div class="grid-personagens">
+                        <div class="card-personagem">
+                            <span class="nome-card">Humano</span>
+                            <div class="info-card">
+                                <span class="vantagem">Vantagem:</span> +1 em todos atributos.<br>
+                                <span class="desvantagem">Desvantagem:</span> Sem visão no escuro.
+                            </div>
+                        </div>
+                        <div class="card-personagem">
+                            <span class="nome-card">Elfo</span>
+                            <div class="info-card">
+                                <span class="vantagem">Vantagem:</span> Visão noturna e Destreza.<br>
+                                <span class="desvantagem">Desvantagem:</span> Físico mais frágil.
+                            </div>
+                        </div>
+                        <div class="card-personagem">
+                            <span class="nome-card">Anão</span>
+                            <div class="info-card">
+                                <span class="vantagem">Vantagem:</span> Resistência a venenos e alta Constituição.<br>
+                                <span class="desvantagem">Desvantagem:</span> Deslocamento menor (lento).
+                            </div>
+                        </div>
+                        <div class="card-personagem">
+                            <span class="nome-card">Draconato</span>
+                            <div class="info-card">
+                                <span class="vantagem">Vantagem:</span> Arma de Sopro Elemental.<br>
+                                <span class="desvantagem">Desvantagem:</span> Alvo chamativo, sem visão noturna.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <input type="hidden" id="racaEscolhida" required>
+                </fieldset>
+
+                <!-- Seleção de Classe / Vocação -->
+                <fieldset class="grupo-campos">
+                    <legend>Classe / Vocação</legend>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <p style="font-size: 13px; color: #ccc;">O caminho que seu herói escolheu trilhar:</p>
+                        <button type="button" class="btn-sorteio" onclick="sortearClasse()">🎲 Sortear Classe</button>
+                    </div>
+                    
+                    <div class="grid-personagens">
+                        <div class="card-personagem">
+                            <span class="nome-card">Guerreiro</span>
+                            <div class="info-card">
+                                <span class="vantagem">Vantagem:</span> Maestria com qualquer arma ou armadura.<br>
+                                <span class="desvantagem">Desvantagem:</span> Nenhuma habilidade mágica.
+                            </div>
+                        </div>
+                        <div class="card-personagem">
+                            <span class="nome-card">Mago</span>
+                            <div class="info-card">
+                                <span class="vantagem">Vantagem:</span> Maior arsenal de feitiços arcanos.<br>
+                                <span class="desvantagem">Desvantagem:</span> Pouquíssimos Pontos de Vida (Frágil).
+                            </div>
+                        </div>
+                        <div class="card-personagem">
+                            <span class="nome-card">Ladino</span>
+                            <div class="info-card">
+                                <span class="vantagem">Vantagem:</span> Ataque furtivo e desarme de armadilhas.<br>
+                                <span class="desvantagem">Desvantagem:</span> Fraco em combate direto contra muitos.
+                            </div>
+                        </div>
+                        <div class="card-personagem">
+                            <span class="nome-card">Clérigo</span>
+                            <div class="info-card">
+                                <span class="vantagem">Vantagem:</span> Magias de cura e suporte divino.<br>
+                                <span class="desvantagem">Desvantagem:</span> Poderes dependem da devoção a um Deus.
+                            </div>
+                        </div>
+                        <div class="card-personagem">
+                            <span class="nome-card">Bárbaro</span>
+                            <div class="info-card">
+                                <span class="vantagem">Vantagem:</span> Fúria em combate e maior HP do jogo.<br>
+                                <span class="desvantagem">Desvantagem:</span> Não pode usar magias ou armaduras pesadas.
+                            </div>
+                        </div>
+                        <div class="card-personagem">
+                            <span class="nome-card">Paladino</span>
+                            <div class="info-card">
+                                <span class="vantagem">Vantagem:</span> Excelente defesa e ataques destruidores divinos.<br>
+                                <span class="desvantagem">Desvantagem:</span> Preso a um juramento de conduta rígido.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <input type="hidden" id="classeEscolhida" required>
+                </fieldset>
+
+                <!-- Atributos -->
+                <fieldset class="grupo-campos">
+                    <legend>Atributos Principais</legend>
+                    
+                    <div class="opcoes-preenchimento" style="margin-bottom: 15px; color: #ffd700;">
+                        <label style="margin-right: 15px;">
+                            <input type="radio" name="modoAtributo" value="manual" checked onchange="mudarModoAtributos(this.value)"> 
+                            Preenchimento Manual
+                        </label>
+                        <label>
+                            <input type="radio" name="modoAtributo" value="automatico" onchange="mudarModoAtributos(this.value)"> 
+                            Automático (Rolar D20)
+                        </label>
+                    </div>
+
+                    <div class="linha-form">
+                        <div class="campo atributo">
+                            <label for="forca">Força (FOR):</label>
+                            <input type="number" id="forca" min="1" max="20" value="10" required>
+                        </div>
+                        <div class="campo atributo">
+                            <label for="destreza">Destreza (DES):</label>
+                            <input type="number" id="destreza" min="1" max="20" value="10" required>
+                        </div>
+                        <div class="campo atributo">
+                            <label for="constituicao">Constituição (CON):</label>
+                            <input type="number" id="constituicao" min="1" max="20" value="10" required>
+                        </div>
+                    </div>
+
+                    <div class="linha-form">
+                        <div class="campo atributo">
+                            <label for="inteligencia">Inteligência (INT):</label>
+                            <input type="number" id="inteligencia" min="1" max="20" value="10" required>
+                        </div>
+                        <div class="campo atributo">
+                            <label for="sabedoria">Sabedoria (SAB):</label>
+                            <input type="number" id="sabedoria" min="1" max="20" value="10" required>
+                        </div>
+                        <div class="campo atributo">
+                            <label for="carisma">Carisma (CAR):</label>
+                            <input type="number" id="carisma" min="1" max="20" value="10" required>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Botões de Ação -->
+                <div class="botoes-acao">
+                    <button type="button" class="btn-salvar" onclick="salvarFicha()">Salvar Ficha</button>
+                    <button type="button" class="btn-voltar" onclick="window.location.href='Tela_inicial.html'">Voltar ao Início</button>
+                    <button type="button" class="btn-nova-ficha" onclick="window.location.href='Fichas.html'">Ver Fichas Salvas</button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+    <script src="../JS/Atributos.js"></script>
+
+</body>
+</html>

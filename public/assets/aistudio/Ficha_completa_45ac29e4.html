@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha Completa - RPG MESA</title>
+    <link rel="stylesheet" href="../CSS/rpg-style.css">
+</head>
+<body>
+
+    <main class="tela-ficha-completa">
+        
+        <div class="painel-ficha-aberta">
+            
+            <!-- Cabeçalho da Ficha -->
+            <header class="cabecalho-ficha">
+                <h1 class="nome-heroi" id="displayNome">Valerius, o Bravo</h1>
+                <div class="info-basica">
+                    <p><strong>Classe/Origem:</strong> <span id="displayClasse">Guerreiro</span></p>
+                    <p><strong>Jogador:</strong> <span id="displayJogador">Peter</span></p>
+                    <p><strong>Nível:</strong> 1</p>
+                </div>
+            </header>
+            
+            <!-- Linha divisória charmosa -->
+            <hr class="divisor-rpg">
+
+            <!-- Corpo da Ficha -->
+            <div class="corpo-ficha" style="display: flex; gap: 30px; margin-top: 20px;">
+                
+                <!-- Coluna 1: Atributos -->
+                <section class="secao-atributos" style="flex: 1;">
+                    <h3 style="color: #ffd700; border-bottom: 1px solid #7a6540; padding-bottom: 5px;">Atributos Principais</h3>
+                    
+                    <div class="lista-atributos">
+                        <p><strong>Força (FOR):</strong> <span id="displayFor">16</span></p>
+                        <p><strong>Destreza (DES):</strong> <span id="displayDes">14</span></p>
+                        <p><strong>Constituição (CON):</strong> <span id="displayCon">15</span></p>
+                        <p><strong>Inteligência (INT):</strong> <span id="displayInt">8</span></p>
+                        <p><strong>Sabedoria (SAB):</strong> <span id="displaySab">10</span></p>
+                        <p><strong>Carisma (CAR):</strong> <span id="displayCar">12</span></p>
+                    </div>
+                </section>
+
+                <!-- Coluna 2: Status e Equipamento -->
+                <section class="secao-status" style="flex: 1;">
+                    <h3 style="color: #ffd700; border-bottom: 1px solid #7a6540; padding-bottom: 5px;">Status de Combate</h3>
+                    
+                    <div class="status-tiles">
+                        <div class="tile pv-tile">
+                            <div class="icon-badge heart" aria-hidden="true">
+                                <!-- simple heart SVG -->
+                                <svg viewBox="0 0 24 24" class="icon" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 21s-7-4.35-9.33-6.66C-0.33 10.67 2.2 6 6 6c2.21 0 3.5 1.2 4 2 .5-.8 1.79-2 4-2 3.8 0 6.33 4.67 3.33 8.34C19 16.65 12 21 12 21z"/></svg>
+                            </div>
+                            <div class="tile-body"><strong>PV</strong><div id="displayPV">12 / 12</div></div>
+                        </div>
+
+                        <div class="tile ca-tile">
+                            <div class="icon-badge shield" aria-hidden="true">
+                                <!-- simple shield SVG -->
+                                <svg viewBox="0 0 24 24" class="icon" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 2l7 3v5c0 5-3.5 9.2-7 11-3.5-1.8-7-6-7-11V5l7-3z"/></svg>
+                            </div>
+                            <div class="tile-body"><strong>CA</strong><div id="displayCA">16</div></div>
+                        </div>
+
+                        <div class="tile atk-tile">
+                            <div class="icon-badge sword" aria-hidden="true">
+                                <!-- simple sword SVG -->
+                                <svg viewBox="0 0 24 24" class="icon" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M2 21l1-4 11-11 2 2L5 19l-3 2zM20.7 3.3l-1.4 1.4-2-2 1.4-1.4a1 1 0 011.4 0l.6.6a1 1 0 010 1.4z"/></svg>
+                            </div>
+                            <div class="tile-body"><strong>Ataque</strong><div id="displayAtk">+5 (Espada Longa)</div></div>
+                        </div>
+                    </div>
+
+                    <h3 style="color: #ffd700; border-bottom: 1px solid #7a6540; padding-bottom: 5px; margin-top: 20px;">Equipamento</h3>
+                    <div class="equipamento-box">
+                        <p id="displayEquip">Espada Longa, Escudo Pesado, Cota de Malha, Mochila de Aventureiro.</p>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Botões de Ação no rodapé -->
+            <div class="botoes-acao" style="margin-top: 40px; display: flex; justify-content: space-between;">
+                <button type="button" class="btn-voltar" onclick="window.location.href='Fichas.html'">Voltar para Lista</button>
+                
+                <!-- Um botão extra legal: chama a função nativa de imprimir a página! -->
+                <button type="button" class="btn-imprimir" onclick="window.print()">Imprimir Ficha</button>
+            </div>
+
+        </div>
+
+        <!-- Seções adicionais inspiradas no modelo PDF -->
+        <div class="painel-ficha-aberta" style="margin-top:24px;">
+            <div class="corpo-adicional" style="display:flex;gap:20px;flex-wrap:wrap;">
+                <section class="secao-pericias" style="flex:1 1 360px;min-width:300px;">
+                    <h3 style="color: var(--gold-bright);">Perícias</h3>
+                    <div class="lista-pericias">
+                        <label><input type="checkbox"> Acrobacia (Des)</label><br>
+                        <label><input type="checkbox"> Arcanismo (Int)</label><br>
+                        <label><input type="checkbox"> Atletismo (For)</label><br>
+                        <label><input type="checkbox"> Furtividade (Des)</label><br>
+                        <label><input type="checkbox"> Investigação (Int)</label><br>
+                        <label><input type="checkbox"> Percepção (Sab)</label><br>
+                        <label><input type="checkbox"> Persuasão (Car)</label><br>
+                        <label><input type="checkbox"> História (Int)</label><br>
+                    </div>
+                    <p class="passiva"><strong>Sabedoria Passiva (Percepção):</strong> <span id="displayPassiva">10</span></p>
+                </section>
+
+                <section class="secao-tracos" style="flex:1 1 360px;min-width:300px;">
+                    <h3 style="color: var(--gold-bright);">Traços & Ideias</h3>
+                    <div class="blocos-tracos">
+                        <div class="bloco"><strong>Traços de Personalidade</strong><p id="tracos">Corajoso e impetuoso.</p></div>
+                        <div class="bloco"><strong>Ideais</strong><p id="ideais">Liberdade acima de tudo.</p></div>
+                        <div class="bloco"><strong>Ligações</strong><p id="ligacoes">Protege sua família.</p></div>
+                        <div class="bloco"><strong>Defeitos</strong><p id="defeitos">Teimosia excessiva.</p></div>
+                    </div>
+                </section>
+
+                <section class="secao-outros" style="flex:1 1 360px;min-width:300px;">
+                    <h3 style="color: var(--gold-bright);">Característica, Idiomas e Aparência</h3>
+                    <div class="bloco"><strong>Características e Habilidades</strong><p id="caracteristicas">Golpe Poderoso, Resiliência.</p></div>
+                    <div class="bloco"><strong>Idiomas e Proficiências</strong><p id="idiomas">Comum, Élfico</p></div>
+                    <div class="bloco"><strong>Aparência</strong><p id="aparencia">Olhos verdes, cicatriz no rosto.</p></div>
+                </section>
+
+                <section class="secao-aliados" style="flex:1 1 740px;min-width:300px;">
+                    <h3 style="color: var(--gold-bright);">Aliados, Organizações e Tesouro</h3>
+                    <div class="bloco"><strong>Aliados e Organizações</strong><p id="aliados">Guilda dos Ferrovelhos.</p></div>
+                    <div class="bloco"><strong>Tesouro</strong><p id="tesouro">PO: 12 • PT: 0 • PP: 0</p></div>
+                </section>
+
+                <section class="secao-magias" style="flex:1 1 740px;min-width:300px;">
+                    <h3 style="color: var(--gold-bright);">Magias / Truques (se aplicável)</h3>
+                    <div class="col-magias" style="display:flex;gap:12px;flex-wrap:wrap;">
+                        <div style="flex:1 1 200px;"><strong>Truques</strong><ul><li>Toque Gélido</li><li>Chama Sagrada</li></ul></div>
+                        <div style="flex:1 1 200px;"><strong>Nível 1</strong><ul><li>Curar Ferimentos</li></ul></div>
+                        <div style="flex:1 1 200px;"><strong>Slots</strong><p>1/1</p></div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+    </main>
+
+        <script src="../JS/Atributos.js"></script>
+
+    </body>
+    </html>

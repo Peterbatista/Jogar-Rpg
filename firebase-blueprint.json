@@ -1,0 +1,108 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Dados do perfil de jogador autenticado",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "papel": { "type": "string", "enum": ["jogador", "mestre", "mestre-jogador"] },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Character": {
+      "title": "Character",
+      "description": "Ficha completa do personagem de RPG de mesa",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "nome": { "type": "string" },
+        "raca": { "type": "string" },
+        "classe": { "type": "string" },
+        "nivel": { "type": "number" },
+        "experiencia": { "type": "number" },
+        "antecedente": { "type": "string" },
+        "tendencia": { "type": "string" },
+        "historia": { "type": "string" },
+        "atributos": { "type": "object" },
+        "combate": { "type": "object" },
+        "detalhes": { "type": "object" },
+        "magias": { "type": "object" },
+        "inventario": { "type": "array" },
+        "alquimia": { "type": "object" },
+        "treino": { "type": "object" },
+        "meditacao": { "type": "object" },
+        "conquistas": { "type": "array" },
+        "buffs": { "type": "array" },
+        "narrativaProgresso": { "type": "object" },
+        "moedas": { "type": "object" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "nome", "raca", "classe", "nivel"]
+    },
+    "RankingEntry": {
+      "title": "RankingEntry",
+      "description": "Entrada pública no ranking global de aventureiros",
+      "type": "object",
+      "properties": {
+        "characterId": { "type": "string" },
+        "characterName": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "raca": { "type": "string" },
+        "classe": { "type": "string" },
+        "nivel": { "type": "number" },
+        "experiencia": { "type": "number" },
+        "alquimiaCrafts": { "type": "number" },
+        "treinoPontos": { "type": "number" },
+        "meditacaoMinutos": { "type": "number" },
+        "conquistasQtd": { "type": "number" },
+        "scoreTotal": { "type": "number" },
+        "titulo": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["characterId", "characterName", "userId", "nivel", "scoreTotal"]
+    },
+    "AppNotification": {
+      "title": "AppNotification",
+      "description": "Notificação sobre desafios diários, eventos ou atualizações",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "tipo": { "type": "string", "enum": ["desafio_diario", "evento_especial", "alquimia", "sistema"] },
+        "xpReward": { "type": "number" },
+        "dataValidade": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "title", "message", "tipo"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Armazena perfis de usuários registrados"
+    },
+    "/characters/{characterId}": {
+      "schema": "Character",
+      "description": "Fichas completas de personagens de RPG"
+    },
+    "/rankings/{characterId}": {
+      "schema": "RankingEntry",
+      "description": "Dados do ranking global público"
+    },
+    "/notifications/{notificationId}": {
+      "schema": "AppNotification",
+      "description": "Notificações públicas e desafios para a comunidade"
+    }
+  }
+}

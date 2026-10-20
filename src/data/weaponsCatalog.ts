@@ -1,0 +1,138 @@
+export interface WeaponDefinition {
+  id: string;
+  nome: string;
+  categoria: 'Simples' | 'Marcial' | 'Arcana / Alquímica';
+  danoDado: string;
+  danoTipo: 'cortante' | 'perfurante' | 'contundente' | 'fogo/arcano';
+  propriedades: string[];
+  pesoKg: number;
+  precoPO: number;
+  alcance?: string;
+  descricao: string;
+  icone: string;
+}
+
+export const WEAPONS_CATALOG: WeaponDefinition[] = [
+  {
+    id: 'arma_espada_longa',
+    nome: 'Espada Longa',
+    categoria: 'Marcial',
+    danoDado: '1d8',
+    danoTipo: 'cortante',
+    propriedades: ['Versátil (1d10)'],
+    pesoKg: 1.5,
+    precoPO: 15,
+    descricao: 'Lâmina nobre forjada em aço temperado com guarda em cruz, versátil com uma ou duas mãos.',
+    icone: '⚔️',
+  },
+  {
+    id: 'arma_machado_batalha',
+    nome: 'Machado de Batalha',
+    categoria: 'Marcial',
+    danoDado: '1d8',
+    danoTipo: 'cortante',
+    propriedades: ['Versátil (1d10)'],
+    pesoKg: 2.0,
+    precoPO: 10,
+    descricao: 'Arma favorita dos guerreiros anões, lâmina pesada capaz de fender escudos e elmos.',
+    icone: '🪓',
+  },
+  {
+    id: 'arma_adaga_alquimica',
+    nome: 'Adaga Alquímica com Canaleta',
+    categoria: 'Simples',
+    danoDado: '1d4',
+    danoTipo: 'perfurante',
+    propriedades: ['Acuidade', 'Leve', 'Arremesso (6/18m)'],
+    pesoKg: 0.5,
+    precoPO: 12,
+    descricao: 'Lâmina precisa com canaleta vazada para aplicação de óleos de mercúrio ou fogo alquímico.',
+    icone: '🗡️',
+  },
+  {
+    id: 'arma_arco_longo',
+    nome: 'Arco Longo Élfico',
+    categoria: 'Marcial',
+    danoDado: '1d8',
+    danoTipo: 'perfurante',
+    propriedades: ['Duas mãos', 'Munição (45/180m)', 'Pesada'],
+    pesoKg: 1.0,
+    precoPO: 50,
+    alcance: '45/180 m',
+    descricao: 'Arco recurvo flexível de teixo élfico com corda encantada, precisão letal a longa distância.',
+    icone: '🏹',
+  },
+  {
+    id: 'arma_cajado_arcano',
+    nome: 'Cajado Arcano de Prata & Quartzo',
+    categoria: 'Arcana / Alquímica',
+    danoDado: '1d6',
+    danoTipo: 'contundente',
+    propriedades: ['Versátil (1d8)', 'Foco de Conjuração'],
+    pesoKg: 1.8,
+    precoPO: 30,
+    descricao: 'Haste esculpida com ponteira de cristal de silício que canaliza feitiços e feixes mágicos.',
+    icone: '🪄',
+  },
+  {
+    id: 'arma_rapieira',
+    nome: 'Rapieira de Duelo',
+    categoria: 'Marcial',
+    danoDado: '1d8',
+    danoTipo: 'perfurante',
+    propriedades: ['Acuidade'],
+    pesoKg: 1.0,
+    precoPO: 25,
+    descricao: 'Lâmina delgada e elástica para esgrimistas e ladinos que priorizam destreza a força bruta.',
+    icone: '🤺',
+  },
+  {
+    id: 'arma_maca_guerra',
+    nome: 'Maça de Guerra Abençoada',
+    categoria: 'Simples',
+    danoDado: '1d6',
+    danoTipo: 'contundente',
+    propriedades: ['Anti-esqueleto'],
+    pesoKg: 2.0,
+    precoPO: 5,
+    descricao: 'Cabeça esférica com aletas de ferro e bronze, destrói mortos-vivos com golpes esmagadores.',
+    icone: '🔨',
+  },
+  {
+    id: 'arma_espada_grande',
+    nome: 'Montante (Espada Grande)',
+    categoria: 'Marcial',
+    danoDado: '2d6',
+    danoTipo: 'cortante',
+    propriedades: ['Duas mãos', 'Pesada'],
+    pesoKg: 3.0,
+    precoPO: 50,
+    descricao: 'Espada colossal de lâmina larga com 2d6 de dano brutal, ideal para guerreiros e bárbaros.',
+    icone: '🗡️',
+  },
+  {
+    id: 'arma_besta_leve',
+    nome: 'Besta Leve de Repetição',
+    categoria: 'Simples',
+    danoDado: '1d8',
+    danoTipo: 'perfurante',
+    propriedades: ['Duas mãos', 'Munição (24/96m)', 'Recarga'],
+    pesoKg: 2.5,
+    precoPO: 25,
+    alcance: '24/96 m',
+    descricao: 'Mecanismo de gatilho articulado desenvolvido por artífices para disparar virotes com alta potência.',
+    icone: '🎯',
+  },
+  {
+    id: 'arma_martelo_guerra',
+    nome: 'Martelo de Guerra Rúnico',
+    categoria: 'Marcial',
+    danoDado: '1d8',
+    danoTipo: 'contundente',
+    propriedades: ['Versátil (1d10)'],
+    pesoKg: 2.0,
+    precoPO: 15,
+    descricao: 'Cabeça pesada de aço com cinzel rúnico gravado, capaz de atordoar monstros em armaduras pesadas.',
+    icone: '⚒️',
+  },
+];

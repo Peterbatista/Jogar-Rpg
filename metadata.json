@@ -1,0 +1,8 @@
+{
+  "name": "Codex RPG - Ficha de Mesa, Alquimia & Treino",
+  "description": "Sistema completo de RPG de Mesa D&D com Codex Elementalis (Alquimia com elementos químicos detalhados), Treino Físico, Meditação, Modo Narrativo Interativo, Rolagens D20 animadas e Ranking Global.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

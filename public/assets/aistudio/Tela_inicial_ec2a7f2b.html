@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela Inicial - RPG MESA</title>
+    <link rel="stylesheet" href="../CSS/rpg-style.css">
+</head>
+<body>
+    <header class="barra-menu">
+        <a class="marca-menu" href="#inicio">RPG - Mesa</a>
+        <nav class="links-menu" aria-label="Navegação principal">
+            <a href="#usuario">Novo Usuário</a>
+            <a href="#personagem">Criar Personagem</a>
+            <a href="#mestre" id="linkAreaMestre">Área do Mestre</a>
+            <a href="#fichas">Fichas Salvas</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="tela-inicial" id="inicio">
+            <div class="painel-menu">
+                <header>
+                    <span class="selo-rpg">Portal da Guilda</span>
+                    <h1 class="titulo-jogo">RPG - Mesa</h1>
+                    <p class="subtitulo">Cadastre jogadores, forje heróis e consulte suas fichas.</p>
+                </header>
+                <div class="botoes-navegacao">
+                    <a class="btn-menu" href="#usuario">Cadastro de usuário</a>
+                    <a class="btn-menu" href="#personagem">Forjar personagem</a>
+                    <a class="btn-menu" href="#fichas">Consultar personagem</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="area-rpg area-usuario" id="usuario">
+            <div class="painel-cadastro">
+                <header>
+                    <span class="selo-rpg">Entrada da Guilda</span>
+                    <h2 class="titulo-jogo">Cadastro de Usuario</h2>
+                    <p class="subtitulo">Registre apenas os dados essenciais para iniciar sua jornada.</p>
+                </header>
+                <form id="formNovoUsuario">
+                    <fieldset class="grupo-campos">
+                        <legend>Dados do Usuario</legend>
+                        <div class="linha-form">
+                            <div class="campo"><label for="nome">Nome:</label><input type="text" id="nome" placeholder="Ex.: Peterson Batista" required></div>
+                            <div class="campo"><label for="fone">Telefone:</label><input type="tel" id="fone" placeholder="(00) 00000-0000" required></div>
+                            <div class="campo"><label for="nasc">Data de nascimento:</label><input type="date" id="nasc" required></div>
+                            <div class="campo"><label for="email">E-mail:</label><input type="email" id="email" placeholder="heroi@reino.com" required></div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="grupo-campos escolha-papel">
+                        <legend>Papel na campanha</legend>
+                        <div class="opcoes-papel">
+                            <label><input type="radio" name="papelUsuario" value="jogador"> Jogador</label>
+                            <label><input type="radio" name="papelUsuario" value="mestre"> Mestre de mesa</label>
+                            <label><input type="radio" name="papelUsuario" value="mestre-jogador"> Mestre/Jogador</label>
+                        </div>
+                    </fieldset>
+                    <div class="botoes-acao"><button type="submit" class="btn-salvar">Salvar Jogador</button><a class="btn-voltar" href="#personagem">Criar Personagem</a><a class="btn-nova-ficha" href="#fichas">Ver Fichas</a></div>
+                </form>
+            </div>
+        </section>
+
+        <section class="area-rpg area-personagem" id="personagem">
+            <div class="personagem-layout">
+                <aside class="arte-barbaro" aria-label="Arte de fantasia do personagem"></aside>
+                <div class="lado-ficha">
+                    <header><span class="selo-rpg">Forja de Heróis</span><h2 class="titulo-jogo">Criar Personagem</h2><p class="subtitulo">Preencha os dados do seu aventureiro.</p></header>
+                    <form id="formNovaFicha" class="ficha-form">
+                        <fieldset class="grupo-campos"><legend>Identidade</legend><div class="campo"><label for="nomePersonagem">Nome do personagem:</label><input type="text" id="nomePersonagem" placeholder="Valerius, o Bravo" required></div><div class="linha-form"><div class="campo"><label for="nivel">Nível:</label><input type="number" id="nivel" min="1" value="1" /></div><div class="campo"><label for="antecedente">Antecedente:</label><input type="text" id="antecedente" placeholder="Soldado, nobre..." /></div><div class="campo"><label for="tendencia">Tendência:</label><input type="text" id="tendencia" placeholder="Leal e bom" /></div><div class="campo"><label for="experiencia">Pontos de experiência:</label><input type="number" id="experiencia" min="0" value="0" /></div></div><div class="campo"><label for="historia">História / Background:</label><textarea id="historia" rows="3" placeholder="Origem, motivações e segredos..."></textarea></div><p class="texto-orientacao">Escolha a classe e os atributos nas seções abaixo.</p></fieldset>
+                        <fieldset class="grupo-campos" id="grupo-raca"><legend>Raça</legend><div class="cabecalho-opcoes"><p>Escolha uma raça para preencher automaticamente suas características.</p><button type="button" class="btn-sorteio" onclick="sortearRaca()">🎲 Sortear raça</button></div><div class="grid-personagens" id="listaRacas"></div><input type="hidden" id="racaEscolhida" required><div class="linha-form campos-raca"><div class="campo"><label for="vantagemRaca">Vantagens:</label><textarea id="vantagemRaca" rows="3" readonly></textarea></div><div class="campo"><label for="desvantagemRaca">Desvantagens:</label><textarea id="desvantagemRaca" rows="3" readonly></textarea></div></div></fieldset>
+                        <fieldset class="grupo-campos" id="grupo-classe"><legend>Classe / Vocação</legend><div class="cabecalho-opcoes"><p>Escolha o caminho do seu herói:</p><button type="button" class="btn-sorteio" onclick="sortearClasse()">🎲 Sortear classe</button></div><div class="grid-personagens"><div class="card-personagem"><span class="nome-card">Guerreiro</span><div class="info-card"><span class="vantagem">Vantagem:</span> Mestre em armas.<br><span class="desvantagem">Desvantagem:</span> Sem magia.</div></div><div class="card-personagem"><span class="nome-card">Mago</span><div class="info-card"><span class="vantagem">Vantagem:</span> Arsenal de feitiços.<br><span class="desvantagem">Desvantagem:</span> Poucos pontos de vida.</div></div><div class="card-personagem"><span class="nome-card">Ladino</span><div class="info-card"><span class="vantagem">Vantagem:</span> Ataque furtivo.<br><span class="desvantagem">Desvantagem:</span> Fraco contra muitos.</div></div><div class="card-personagem"><span class="nome-card">Clérigo</span><div class="info-card"><span class="vantagem">Vantagem:</span> Cura e suporte.<br><span class="desvantagem">Desvantagem:</span> Depende da devoção.</div></div><div class="card-personagem"><span class="nome-card">Bárbaro</span><div class="info-card"><span class="vantagem">Vantagem:</span> Fúria e maior HP.<br><span class="desvantagem">Desvantagem:</span> Não usa magia.</div></div><div class="card-personagem"><span class="nome-card">Paladino</span><div class="info-card"><span class="vantagem">Vantagem:</span> Defesa divina.<br><span class="desvantagem">Desvantagem:</span> Juramento rígido.</div></div></div><input type="hidden" id="classeEscolhida"></fieldset>
+                        <fieldset class="grupo-campos"><legend>Atributos</legend><div class="opcoes-preenchimento"><button type="button" class="btn-d20" onclick="mudarModoAtributos('automatico')">🎲 Sortear D20</button><span>Preencher automaticamente</span><label><input type="radio" name="modoAtributo" value="manual" checked onchange="mudarModoAtributos(this.value)"> Preenchimento manual</label></div><div class="linha-form"><div class="campo atributo"><label for="forca">Força:</label><input type="number" id="forca" min="1" max="20" value="10" required></div><div class="campo atributo"><label for="destreza">Destreza:</label><input type="number" id="destreza" min="1" max="20" value="10" required></div><div class="campo atributo"><label for="constituicao">Constituição:</label><input type="number" id="constituicao" min="1" max="20" value="10" required></div><div class="campo atributo"><label for="inteligencia">Inteligência:</label><input type="number" id="inteligencia" min="1" max="20" value="10" required></div><div class="campo atributo"><label for="sabedoria">Sabedoria:</label><input type="number" id="sabedoria" min="1" max="20" value="10" required></div><div class="campo atributo"><label for="carisma">Carisma:</label><input type="number" id="carisma" min="1" max="20" value="10" required></div></div></fieldset>
+                        <fieldset class="grupo-campos"><legend>Combate</legend><div class="linha-form"><div class="campo"><label for="pvMax">PV totais:</label><input type="number" id="pvMax" min="0" value="10"></div><div class="campo"><label for="pvAtual">PV atuais:</label><input type="number" id="pvAtual" min="0" value="10"></div><div class="campo"><label for="pvTemp">PV temporários:</label><input type="number" id="pvTemp" min="0" value="0"></div><div class="campo"><label for="classeArmd">Classe de armadura:</label><input type="number" id="classeArmd" min="0" value="10"></div><div class="campo"><label for="dadosVida">Dados de vida:</label><input type="text" id="dadosVida" placeholder="1d10"></div></div></fieldset>
+                        <fieldset class="grupo-campos"><legend>Iniciativa até inspiração</legend><div class="linha-form"><div class="campo"><label for="iniciativa">Iniciativa:</label><input type="text" id="iniciativa" placeholder="+2"></div><div class="campo"><label for="deslocamento">Deslocamento:</label><input type="text" id="deslocamento" placeholder="9 m"></div><div class="campo"><label for="bonusProf">Bônus de proficiência:</label><input type="text" id="bonusProf" placeholder="+2"></div><div class="campo"><label for="inspiracao">Inspiração:</label><input type="text" id="inspiracao" placeholder="Sim ou não"></div></div></fieldset>
+                        <fieldset class="grupo-campos"><legend>Equipamento e ataques</legend><div class="cabecalho-opcoes"><p>Escolha os itens ou preencha automaticamente uma sugestão.</p><button type="button" class="btn-sorteio" onclick="preencherEquipamentoAutomatico()">✨ Preencher equipamento</button></div><div class="linha-form"><div class="campo"><label for="equipamentoOpcao">Kit de equipamento:</label><select id="equipamentoOpcao"><option value="">Escolher kit</option><option value="aventureiro">Kit de aventureiro</option><option value="guerreiro">Kit de guerreiro</option><option value="mago">Kit de estudioso arcano</option><option value="ladino">Kit de ladino</option><option value="arqueiro">Kit de arqueiro</option></select></div><div class="campo"><label for="equipamento">Equipamento:</label><textarea id="equipamento" rows="2" placeholder="Armas, armaduras e itens"></textarea></div></div><div class="cabecalho-opcoes"><p>Dados do ataque principal</p><button type="button" class="btn-sorteio" onclick="preencherArmaAutomatica()">⚔ Preencher arma</button></div><div class="linha-form"><div class="campo"><label for="ataqueArma">Nome:</label><select id="ataqueArma"><option value="">Escolher arma</option><option value="Espada longa">Espada longa</option><option value="Machado de batalha">Machado de batalha</option><option value="Arco curto">Arco curto</option><option value="Adaga">Adaga</option><option value="Cajado arcano">Cajado arcano</option><option value="Maça">Maça</option></select></div><div class="campo"><label for="ataqueBonus">Bônus:</label><input type="text" id="ataqueBonus" placeholder="+5"></div><div class="campo"><label for="ataqueDano">Dano / Tipo:</label><input type="text" id="ataqueDano" placeholder="1d8 cortante"></div><div class="campo"><label for="ataques">Ataques e magias:</label><textarea id="ataques" rows="2" placeholder="Outros ataques, magias e observações"></textarea></div></div></fieldset>
+                            <fieldset class="grupo-campos"><legend>Ataques e magias automáticos</legend><div class="cabecalho-opcoes"><p>Escolha uma magia da classe para preencher nome, efeito e dano.</p><button type="button" class="btn-sorteio" onclick="preencherMagiaAutomatica()">Preencher magia</button></div><div class="linha-form"><div class="campo"><label for="ataqueMagiaOpcao">Magia da classe:</label><select id="ataqueMagiaOpcao"><option value="">Escolher magia</option></select></div><div class="campo campo-largo"><label for="ataquesMagiaDetalhes">Detalhes preenchidos:</label><textarea id="ataquesMagiaDetalhes" rows="4" readonly></textarea></div></div></fieldset>
+                        <fieldset class="grupo-campos"><legend>Moedas e testes contra a morte</legend><div class="linha-form"><div class="campo"><label for="moedas">Moedas (PC, PE, PO, PP, PL):</label><input type="text" id="moedas" placeholder="PC 0 | PE 0 | PO 0 | PP 0 | PL 0"></div><div class="campo"><label for="sucessosMorte">Testes contra a morte - sucessos:</label><input type="number" id="sucessosMorte" min="0" max="3" value="0"></div><div class="campo"><label for="fracassosMorte">Testes contra a morte - fracassos:</label><input type="number" id="fracassosMorte" min="0" max="3" value="0"></div></div></fieldset>
+                        <fieldset class="grupo-campos"><legend>História e características</legend><div class="linha-form"><div class="campo"><label for="tracos">Traços de personalidade:</label><textarea id="tracos" rows="2"></textarea></div><div class="campo"><label for="ideais">Ideais:</label><textarea id="ideais" rows="2"></textarea></div><div class="campo"><label for="ligacoes">Ligações:</label><textarea id="ligacoes" rows="2"></textarea></div><div class="campo"><label for="defeitos">Defeitos:</label><textarea id="defeitos" rows="2"></textarea></div><div class="campo"><label for="caracteristicas">Outras características e habilidades:</label><textarea id="caracteristicas" rows="2"></textarea></div><div class="campo"><label for="idiomas">Idiomas e proficiências:</label><textarea id="idiomas" rows="2"></textarea></div></div><div class="linha-form"><div class="campo"><label for="aparencia">Aparência:</label><textarea id="aparencia" rows="2"></textarea></div><div class="campo"><label for="idade">Idade:</label><input type="text" id="idade"></div><div class="campo"><label for="altura">Altura:</label><input type="text" id="altura"></div><div class="campo"><label for="peso">Peso:</label><input type="text" id="peso"></div><div class="campo"><label for="olhos">Olhos:</label><input type="text" id="olhos"></div><div class="campo"><label for="pele">Pele:</label><input type="text" id="pele"></div><div class="campo"><label for="cabelos">Cabelos:</label><input type="text" id="cabelos"></div><div class="campo"><label for="aliados">Aliados e organizações:</label><textarea id="aliados" rows="2"></textarea></div><div class="campo"><label for="tesouro">Tesouro:</label><textarea id="tesouro" rows="2"></textarea></div></div></fieldset>
+                        <fieldset class="grupo-campos"><legend>Magias</legend><div class="linha-form"><div class="campo"><label for="classeConjurador">Classe de conjurador:</label><input type="text" id="classeConjurador"></div><div class="campo"><label for="habilidadeChave">Habilidade-chave:</label><input type="text" id="habilidadeChave"></div><div class="campo"><label for="cdTr">CD do teste:</label><input type="text" id="cdTr"></div><div class="campo"><label for="bonusAtaqueMagia">Bônus de ataque:</label><input type="text" id="bonusAtaqueMagia"></div><div class="campo"><label for="truques">Truques:</label><textarea id="truques" rows="2"></textarea></div><div class="campo"><label for="magiasConhecidas">Magias conhecidas:</label><textarea id="magiasConhecidas" rows="2"></textarea></div></div></fieldset>
+                        <div class="botoes-acao"><button type="submit" class="btn-salvar">Salvar Ficha</button></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+            <section class="area-rpg area-mestre" id="mestre">
+                <div class="painel-conteudo mestre-painel">
+                    <header><span class="selo-rpg">Sala do Mestre</span><h2 class="titulo-jogo">Painel da Campanha</h2><p class="subtitulo">Prepare NPCs, encontros, bestiário e a história do mundo.</p><div class="botoes-acao mestre-acoes"><button type="button" class="btn-salvar" onclick="abrirNpcModal()">Criar NPC</button><a class="btn-nova-ficha" href="#mestreBestiario">Acessar bestiário</a><a class="btn-voltar" href="#listaNpcs">Consultar NPCs</a></div></header>
+                    <section class="ficha-bloco historia-campanha"><div class="cabecalho-opcoes"><h3>História da campanha</h3><button type="button" class="btn-salvar" onclick="salvarHistoriaCampanha()">Salvar história</button></div><textarea id="historiaCampanha" rows="4" placeholder="Registre acontecimentos, pistas e decisões para a próxima sessão..."></textarea></section>
+                    <div id="listaNpcs" class="painel-npcs"><h3>NPCs da campanha</h3><div class="lista-npcs" id="listaNpcsConteudo"></div></div>
+                    <div id="mestreBestiario"><header><span class="selo-rpg">Bestiário</span><h3>Catálogo de ameaças</h3><button type="button" class="btn-salvar" id="carregarBestiario" onclick="carregarBestiarioSrd()">Carregar bestiário SRD completo</button><output class="status-bestiario" id="statusBestiario"></output></header></div>
+                    <div class="mestre-controles">
+                        <div class="campo"><label for="buscaMonstro">Buscar monstro:</label><input type="search" id="buscaMonstro" placeholder="Nome ou tipo"></div>
+                        <div class="campo"><label for="filtroTipoMonstro">Tipo:</label><select id="filtroTipoMonstro"><option value="">Todos os tipos</option></select></div>
+                        <div class="campo"><label for="filtroNdMonstro">ND:</label><select id="filtroNdMonstro"><option value="">Todos os ND</option></select></div>
+                    </div>
+                    <div class="mestre-ferramentas">
+                        <section class="ferramenta-mestre"><h3>Rolar dados</h3><div class="rolagem-controles"><div class="campo"><label for="quantidadeDados">Quantidade:</label><input type="number" id="quantidadeDados" min="1" max="100" value="1"></div><div class="campo"><label for="tipoDado">Tipo:</label><select id="tipoDado"><option value="4">d4</option><option value="6">d6</option><option value="10">d10</option><option value="20" selected>d20</option><option value="100">d100</option></select></div><button type="button" class="btn-d20" onclick="rolarDadosMestre()">Rolar dados</button></div><output class="resultado-rolagem" id="resultadoRolagem">Nenhuma rolagem ainda.</output><div class="historico-rolagens" id="historicoRolagens"></div></section>
+                        <section class="ferramenta-mestre"><h3>Vida do personagem</h3><div class="campo"><label for="personagemVidaSelect">Personagem salvo:</label><select id="personagemVidaSelect"><option value="">Selecione um personagem</option></select></div><div class="vida-controles"><label>PV atuais <input type="number" id="personagemPvAtual" min="0" value="0"></label><span>/</span><strong id="personagemPvMax">0</strong><button type="button" class="btn-salvar" onclick="salvarVidaPersonagem()">Atualizar PV</button></div></section>
+                    </div>
+                    <div class="mestre-layout"><div class="lista-monstros" id="listaMonstros"></div><article class="ficha-monstro" id="fichaMonstro"><p class="lista-vazia">Selecione um monstro para consultar a ficha.</p></article></div>
+                </div>
+            </section>
+
+            <section class="area-rpg" id="fichas"><div class="painel-conteudo"><header><span class="selo-rpg">Arquivo da Guilda</span><h2 class="titulo-jogo">Fichas Salvas</h2><p class="subtitulo">Consulte os heróis já registrados.</p></header><div class="lista-fichas" id="listaFichas"></div></div></section>
+    </main>
+
+    <div class="modal-ficha" id="modalPapel" role="dialog" aria-modal="true" aria-labelledby="modalPapelTitulo" hidden>
+        <div class="modal-ficha-conteudo modal-papel-conteudo"><h2 id="modalPapelTitulo">Como você participará da campanha?</h2><p class="subtitulo">Escolha um papel para entrar na mesa.</p><div class="botoes-acao papel-acoes"><button type="button" class="btn-voltar" onclick="definirPapel('jogador')">Jogador</button><button type="button" class="btn-salvar" onclick="definirPapel('mestre')">Mestre de mesa</button><button type="button" class="btn-salvar" onclick="definirPapel('mestre-jogador')">Mestre/Jogador</button></div></div>
+    </div>
+
+    <div class="modal-ficha" id="modalNpc" role="dialog" aria-modal="true" aria-labelledby="modalNpcTitulo" hidden>
+        <div class="modal-ficha-conteudo modal-npc-conteudo"><button type="button" class="modal-fechar" onclick="fecharNpcModal()" aria-label="Fechar criação de NPC">&times;</button><h2 id="modalNpcTitulo">Criar NPC</h2><form id="formNpc"><div class="linha-form"><div class="campo"><label for="npcNome">Nome:</label><input id="npcNome" required></div><div class="campo"><label for="npcTipo">Tipo:</label><input id="npcTipo" placeholder="Humano, criatura, aliado..."></div><div class="campo"><label for="npcGrupo">Grupo ou família:</label><input id="npcGrupo" placeholder="Casa Valerius, Guarda Real..."></div><div class="campo"><label for="npcRelacao">Vínculo:</label><input id="npcRelacao" placeholder="Irmão, líder, rival..."></div></div><div class="linha-form"><div class="campo"><label for="npcRaca">Raça:</label><input id="npcRaca"></div><div class="campo"><label for="npcClasse">Classe / função:</label><input id="npcClasse"></div><div class="campo"><label for="npcPv">PV:</label><input id="npcPv" type="number" min="0" value="10"></div><div class="campo"><label for="npcCa">CA:</label><input id="npcCa" type="number" min="0" value="10"></div></div><div class="campo"><label for="npcHistoria">História e observações:</label><textarea id="npcHistoria" rows="5"></textarea></div><div class="botoes-acao"><button type="submit" class="btn-salvar">Salvar NPC</button><button type="button" class="btn-voltar" onclick="fecharNpcModal()">Cancelar</button></div></form></div>
+    </div>
+
+    <div class="modal-ficha" id="modalFicha" role="dialog" aria-modal="true" aria-labelledby="modalFichaNome" hidden>
+        <div class="modal-ficha-conteudo">
+            <button type="button" class="modal-fechar" onclick="fecharFichaModal()" aria-label="Fechar ficha">&times;</button>
+            <header class="modal-ficha-cabecalho">
+                <span class="selo-rpg">Ficha completa</span>
+                <h2 class="nome-heroi" id="modalFichaNome"></h2>
+                <p class="subtitulo" id="modalFichaOrigem"></p>
+            </header>
+            <div class="ficha-documento">
+                <section class="ficha-pagina">
+                    <div class="ficha-faixa"><span>Classe e nível</span><strong><span id="modalFichaClasse"></span> <small>Nível <b id="modalFichaNivel"></b></small></strong><span>Raça</span><strong id="modalFichaRaca"></strong><span>Antecedente</span><strong id="modalFichaAntecedente"></strong><span>Tendência</span><strong id="modalFichaTendencia"></strong></div>
+                    <div class="ficha-bloco ficha-bloco-destaque"><h3>Atributos</h3><div class="atributos-modal" id="modalFichaAtributos"></div><p><strong>Experiência:</strong> <span id="modalFichaExperiencia"></span></p></div>
+                    <div class="ficha-bloco"><h3>Combate</h3><div class="dados-combate"><div><b>PV atuais</b><strong id="modalFichaPv"></strong></div><div><b>PV temporários</b><strong id="modalFichaPvTemp"></strong></div><div><b>CA</b><strong id="modalFichaArmd"></strong></div><div><b>Iniciativa</b><strong id="modalFichaIniciativa"></strong></div><div><b>Deslocamento</b><strong id="modalFichaDeslocamento"></strong></div><div><b>Proficiência</b><strong id="modalFichaBonusProf"></strong></div><div><b>Dados de vida</b><strong id="modalFichaDadosVida"></strong></div><div><b>Testes contra a morte</b><strong id="modalFichaMorte"></strong></div></div></div>
+                    <div class="ficha-duas-colunas"><div class="ficha-bloco"><h3>Testes de resistência</h3><div class="lista-ficha editavel-lista" id="modalFichaResistencias"></div></div><div class="ficha-bloco"><h3>Perícias</h3><div class="lista-ficha editavel-lista" id="modalFichaPericias"></div></div></div>
+                    <div class="ficha-duas-colunas"><div class="ficha-bloco"><h3>Sabedoria passiva</h3><label class="campo-modal">Percepção <input type="number" id="modalFichaPassiva" min="0"></label><h3>Inspiração</h3><label class="campo-modal">Valor / descrição <input type="text" id="modalFichaInspiracao"></label></div><div class="ficha-bloco"><h3>Equipamento</h3><p id="modalFichaEquipamento"></p></div></div>
+                    <div class="ficha-bloco"><h3>Ataques e magias</h3><p id="modalFichaAtaques"></p></div>
+                </section>
+                <section class="ficha-pagina">
+                    <div class="ficha-faixa"><span>Nome do personagem</span><strong id="modalFichaNomeSecundario"></strong></div>
+                    <div class="ficha-bloco ficha-bloco-alto"><h3>História do personagem</h3><p id="modalFichaHistoria"></p></div>
+                    <div class="ficha-bloco"><h3>Características e habilidades</h3><p id="modalFichaCaracteristicas"></p></div>
+                    <div class="ficha-duas-colunas"><div class="ficha-bloco"><h3>Traços de personalidade</h3><p id="modalFichaTracos"></p><h3>Ideais</h3><p id="modalFichaIdeais"></p></div><div class="ficha-bloco"><h3>Ligações</h3><p id="modalFichaLigacoes"></p><h3>Defeitos</h3><p id="modalFichaDefeitos"></p></div></div>
+                    <div class="ficha-duas-colunas"><div class="ficha-bloco"><h3>Aparência</h3><p id="modalFichaAparencia"></p><p id="modalFichaFisico"></p></div><div class="ficha-bloco"><h3>Aliados e organizações</h3><p id="modalFichaAliados"></p></div></div>
+                    <div class="ficha-duas-colunas"><div class="ficha-bloco"><h3>Idiomas e proficiências</h3><p id="modalFichaIdiomas"></p></div><div class="ficha-bloco"><h3>Tesouro</h3><p id="modalFichaTesouro"></p><h3>Moedas</h3><p id="modalFichaMoedas"></p></div></div>
+                </section>
+                <section class="ficha-pagina">
+                    <div class="ficha-faixa"><span>Classe de conjurador</span><strong id="modalFichaClasseConjurador"></strong><span>Habilidade-chave</span><strong id="modalFichaHabilidadeChave"></strong><span>CD do teste</span><strong id="modalFichaCdTr"></strong><span>Bônus de ataque</span><strong id="modalFichaBonusAtaque"></strong></div>
+                    <div class="ficha-bloco ficha-bloco-magias"><h3>Truques</h3><p id="modalFichaTruques"></p></div>
+                    <div class="ficha-bloco ficha-bloco-magias"><h3>Magias conhecidas</h3><p id="modalFichaMagias"></p></div>
+                </section>
+            </div>
+            <div class="botoes-acao modal-ficha-acoes">
+                <button type="button" class="btn-salvar" onclick="salvarAlteracoesFicha()">Salvar alterações e backup</button>
+                <button type="button" class="btn-voltar" onclick="fecharFichaModal()">Fechar ficha</button>
+                <button type="button" class="btn-imprimir" onclick="window.print()">Imprimir ficha</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../JS/Atributos.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fichas Salvas - RPG MESA</title>
+    <link rel="stylesheet" href="../CSS/rpg-style.css">
+</head>
+<body>
+
+    <main class="tela-consulta">
+        
+        <div class="painel-conteudo">
+            
+            <header>
+                <h1 class="titulo-jogo">Arquivos da Guilda</h1>
+                <p class="subtitulo">Consulte os heróis já registrados</p>
+            </header>
+            
+            <!-- Lista onde as fichas vão aparecer -->
+            <div class="lista-fichas">
+                
+                <!-- Exemplo 1 de Ficha Salva -->
+                <div class="card-lista">
+                    <div class="info-resumo">
+                        <p><strong>Jogador:</strong> Peter</p>
+                        <p><strong>Personagem:</strong> Valerius, o Bravo</p>
+                    </div>
+                    <div class="acao-lista">
+                        <button type="button" class="btn-abrir" onclick="window.location.href='visualizar_ficha.html'">Abrir Ficha</button>
+                        <!-- Novo botão de deletar chamando a função JavaScript -->
+                        <button type="button" class="btn-deletar" onclick="deletarPersonagem()">Deletar</button>
+                    </div>
+                </div>
+
+                <!-- Exemplo 2 de Ficha Salva -->
+                <div class="card-lista">
+                    <div class="info-resumo">
+                        <p><strong>Jogador:</strong> Peter</p>
+                        <p><strong>Personagem:</strong> Thorin, Quebra-Escudos</p>
+                    </div>
+                    <div class="acao-lista">
+                        <button type="button" class="btn-abrir" onclick="window.location.href='visualizar_ficha.html'">Abrir Ficha</button>
+                        <button type="button" class="btn-deletar" onclick="deletarPersonagem()">Deletar</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Botões de Ação no rodapé -->
+            <div class="botoes-acao" style="margin-top: 30px; justify-content: center;">
+                <button type="button" class="btn-voltar" onclick="window.location.href='Tela_inicial.html'">Voltar ao Início</button>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Script para a mensagem de confirmação -->
+    <script>
+        function deletarPersonagem() {
+            // O confirm abre a janela com a pergunta. Se o usuário clicar em "OK", ele retorna true.
+            let confirmacao = confirm("Tem certeza que deseja fazer isso?");
+            
+            if (confirmacao) {
+                // Aqui no futuro vai entrar o código para apagar a ficha do banco de dados/localStorage
+                alert("Personagem deletado com sucesso!");
+            }
+            // Se clicar em cancelar, ele não faz nada (o que é exatamente o que queremos)
+        }
+    </script>
+
+</body>
+</html>
